@@ -72,6 +72,31 @@ class BinarySearchTree {
       return this.search(node.right, data)
     } else return node
   }
+
+  breadthFirst(node) {
+    let result = []
+    let queue = []
+
+    if (node !== null) {
+      queue.push(node)
+
+      while (queue.length > 0) {
+        let newNode = queue.shift()
+
+        result.push(newNode.data)
+
+        if (newNode.left !== null) {
+          queue.push(newNode.left)
+        }
+
+        if (newNode.right !== null) {
+          queue.push(newNode.right)
+        }
+      }
+    }
+
+    return result
+  }
 }
 
 let tree = new BinarySearchTree()
@@ -85,3 +110,4 @@ tree.insert(25)
 console.log(tree.search(tree.root, 2))
 
 tree.postorder(tree.root)
+console.log(tree.breadthFirst(tree.root))
